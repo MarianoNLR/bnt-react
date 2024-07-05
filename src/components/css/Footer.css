@@ -1,0 +1,11 @@
+.footer-wrapper {
+  text-align: center;
+  padding: 15px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.footer-copyright {
+  margin: 0;
+}

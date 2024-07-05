@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 15px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+.nav-list-item {
+  cursor: pointer;
+}
+
+.total-coins {
+  cursor: default;
+}
