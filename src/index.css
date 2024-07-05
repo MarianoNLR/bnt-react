@@ -17,7 +17,7 @@
 #root {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, rgba(4,13,18,1) 0%, rgba(14,18,20,1) 60%, rgba(17,18,19,1) 100%, rgba(128,128,128,1) 100%);
+  background: #252424;
   color: aliceblue;
 }
 
