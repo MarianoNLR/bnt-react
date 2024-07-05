@@ -94,7 +94,7 @@ export const GameView = () => {
                                 onChange={(e) => handleChange(bet.id, e.target.value)}>
                                     <option value="win">Victoria</option>
                                     <option value="lose">Derrota</option>
-                                </select>
+                                    </select>
                                 </div>
                             </div>
                         </>

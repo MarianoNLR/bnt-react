@@ -13,9 +13,6 @@ export const GameBet = () => {
     const [loading, setLoading] = useState(true)
     const { user } = useUser()
     const navigate = useNavigate()
-    //const userData = JSON.parse(window.localStorage.getItem('loggedApp'))
-    //const [socket, setSocket] = useState(null)
-    //const [players, setPlayers] = useState([])
 
     useEffect(() => {
        const fetchRoomData = async() =>  {
@@ -35,7 +32,9 @@ export const GameBet = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        if (user.coins < betCoins) {
+            return console.error(`Solamente tienes ${user.coins}`)
+        }
         try {
             const res = await fetch(`http://localhost:3000/bets/${room}`, {
                 method: 'POST',
@@ -73,11 +72,14 @@ export const GameBet = () => {
         <>
             <main className="main-game_bet-page">
                 {!loading && <h1>{roomData.name}</h1>}
-                <form className="make-bet-form" method="post" onSubmit={handleSubmit}>
-                    <FormInput className='new-bet-input description' type="text" name='bet_description' id="bet_description" placeholder='Escribe tu predicción' onChange={(e) => onChangeDescription(e)}></FormInput>
-                    <FormInput className='new-bet-input coins' type="number" name='bet_coins' id="bet_coins" placeholder='Coins' onChange={(e) => onChangeCoins(e)}></FormInput>
-                    <button type="submit">Enviar</button>
-                </form>
+                {user && 
+                    <form className="make-bet-form" method="post" onSubmit={handleSubmit}>
+                        <FormInput className='new-bet-input description' type="text" name='bet_description' id="bet_description" placeholder='Escribe tu predicción' onChange={(e) => onChangeDescription(e)}></FormInput>
+                        <FormInput className='new-bet-input coins' type="number" name='bet_coins' id="bet_coins" placeholder='Coins' onChange={(e) => onChangeCoins(e)}></FormInput>
+                        <button type="submit">Enviar</button>
+                    </form>
+                }
+
             </main>
         </>
     )

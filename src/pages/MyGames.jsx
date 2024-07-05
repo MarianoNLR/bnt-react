@@ -68,14 +68,14 @@ export const MyGames = () => {
                          <div className="room-list-item" key={index}><span className="list-item-name">{room.name}</span>{room.status === 'Abierto' 
                              ? <>
                              <div className="list-item-buttons">
-                             <button onClick={(e) => handleJoinClick(room, e)}>Entrar</button>
-                             {user.id == room.createdBy ? <button onClick={(e) => handleCloseClick(room.id, e)}>Cerrar</button> : <div>{typeof user.coins}</div> }
+                             <button className="join-button" onClick={(e) => handleJoinClick(room, e)}>Entrar</button>
+                             {user.id == room.createdBy ? <button className="close-button" onClick={(e) => handleCloseClick(room.id, e)}>Cerrar</button> : <div>{typeof user.coins}</div> }
                              </div>
                              </>
                              :
                              <>
                              <div className="list-item-buttons">
-                             <button onClick={(e) => {e.preventDefault(); navigate(`/game_view/${room.id}`)}}>Ver</button>
+                             <button className="view-button" onClick={(e) => {e.preventDefault(); navigate(`/game_view/${room.id}`)}}>Ver</button>
                              </div>
                              </>}</div>
                      ))}

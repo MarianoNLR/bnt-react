@@ -7,8 +7,9 @@ import { useUser } from '../components/UserProvider'
 export const Home = () => {
     const [roomName, setRoomName] = useState('')
     const [roomList, setRoomList] = useState([])
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
-    const user = useUser()
+    const { user } = useUser()
 
     useEffect(() => {
         async function fetchRooms() {
@@ -17,6 +18,7 @@ export const Home = () => {
             })
             const data = await res.json()
             setRoomList(data.result)
+            setLoading(false)
         }
 
         fetchRooms()
@@ -102,29 +104,36 @@ export const Home = () => {
 
     return(
         <>
-        <main className='main-home'>
-            <h1>Pagina Principal</h1>
-            <form className='create-room-form'>
-            <input type="text"
-            value={roomName}
-            onChange={handleOnChangeRoomName}
-            placeholder='Nombre de la sala' />
-            <button onClick={createRoom}>Crear Sala</button>
-            </form>
-            <div className='room-list-wrapper'>
-                {roomList.map((room, index) => (
-                    <div className='room-list-item' key={index}><span className='list-item-name'>{room.name}</span>{room.status === 'Abierto' 
-                        ? <>
-                        <div className='list-item-buttons'>
-                        <button onClick={(e) => handleJoinClick(room, e)}>Entrar</button>
-                        { user.id == room.createdBy ? <button onClick={(e) => handleCloseClick(room.id, e)}>Cerrar</button> : null }
-                        </div>
-                        </>
-                        : 
-                        <button disabled={true}>Cerrado</button>}</div>
-                ))}
-            </div>
-        </main>
+            <main className='main-home'>
+            {!loading &&
+            <>
+                <h1>Salas Abiertas</h1>
+                <form className='create-room-form'>
+                <input
+                className='create-room-input'
+                type="text"
+                value={roomName}
+                onChange={handleOnChangeRoomName}
+                placeholder='Nombre de la sala' />
+                <button className='new-room-button' onClick={createRoom}>Crear Sala</button>
+                </form>
+                <div className='room-list-wrapper'>
+                    {roomList.map((room, index) => (
+                        <div className='room-list-item' key={index}><span className='list-item-name'>{room.name}</span>{room.status === 'Abierto' 
+                            ? <>
+                            <div className='list-item-buttons'>
+                            <button className='join-button' onClick={(e) => handleJoinClick(room, e)}>Entrar</button>
+                            { user.id == room.createdBy ? <button className='close-button' onClick={(e) => handleCloseClick(room.id, e)}>Cerrar</button> : <div>{user.id}</div> }
+                            </div>
+                            </>
+                            : 
+                            <button disabled={true}>Cerrado</button>}</div>
+                    ))}
+                </div>
+            </>
+            }
+            </main>
+        
         </>
         
     )

@@ -1,5 +1,5 @@
 .main-game_view-page {
-    height: 100vh;
+    min-height: 100vh;
     min-width: 100%;
     display: flex;
     flex-direction: column;
@@ -20,13 +20,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
     font-weight: 600;
     font-size: 1.5rem;
 }
 
 .bets-list-item-description {
-
+    word-wrap: break-word;
+    white-space: normal;
+    min-width: 200px;
+    max-width: 200px;
+    text-align: start;
 }
 
 .bets-list-item-coins {
@@ -35,4 +40,15 @@
 
 .bets-list-item-result {
     display: flex;
+}
+
+.bets-list-item-result select {
+    padding: .5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+}
+
+.bets-list-item-result select:focus {
+    outline: none;
 }

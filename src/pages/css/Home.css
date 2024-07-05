@@ -21,6 +21,18 @@
     gap: .8rem;
 }
 
+.create-room-input {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    border-radius: 50px;
+    padding: 1rem;
+}
+
+.create-room-input:focus {
+    outline: none;
+}
+
 .room-list-wrapper {
     display: flex;
     flex-direction: column;
@@ -47,4 +59,49 @@
     display: flex;
     flex-direction: row;
     gap: .5rem;
+}
+
+.join-button {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgb(55, 158, 158);
+    transition: all .2s linear;
+}
+
+.join-button:hover {
+    box-shadow: 0px 0px 20px -3px rgba(24,61,61,0.7);
+-webkit-box-shadow: 0px 0px 20px -3px rgba(24,61,61,0.7);
+-moz-box-shadow: 0px 0px 20px -3px rgba(24,61,61,0.7);
+    border: 1px solid rgb(24, 61, 61);
+    color: rgb(55, 158, 158);
+}
+
+.close-button {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgb(255, 96, 96);
+    transition: all .2s linear;
+}
+
+.close-button:hover {
+    box-shadow: 0px 0px 20px -3px rgba(133, 45, 45, 0.7);
+-webkit-box-shadow: 0px 0px 20px -3px rgba(133, 45, 45, 0.7);
+-moz-box-shadow: 0px 0px 20px -3px rgba(133, 45, 45, 0.7);
+    border: 1px solid rgba(133, 45, 45, 0.7);
+    color: rgb(255, 96, 96);
+}
+
+.new-room-button {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgb(185, 136, 44);
+    transition: all .2s linear;
+}
+
+.new-room-button:hover {
+    box-shadow: 0px 0px 20px -3px rgb(185, 136, 44);
+    -webkit-box-shadow: 0px 0px 20px -3px rgb(185, 136, 44);
+    -moz-box-shadow: 0px 0px 20px -3px rgb(185, 136, 44);
+    border: 1px solid rgb(185, 136, 44);
+    color: rgb(185, 136, 44);
 }
