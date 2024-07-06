@@ -34,7 +34,7 @@ export const HeaderLogged = () => {
                 {user && <nav className="nav-wrapper">
                     <ul className="nav-list">
                         <li className="nav-list-item" onClick={() => {navigate('/my_games')}}>Mis Juegos</li>
-                        <li className="nav-list-item total-coins"><span>Nava Coins: </span>{user.coins}</li>
+                        <li className="nav-list-item total-coins"><span>Nava Coins: </span>{user.user.coins}</li>
                     </ul>
                 </nav>}
                 
