@@ -14,7 +14,6 @@ function App() {
   const user = useUser()
   return (
     <>
-        <Router>
           <Routes>
             <Route element={<LoggedLayout />}>
               <Route index path='/' element={ user ? <Home /> : <Navigate to="/login" />}></Route>
@@ -28,7 +27,6 @@ function App() {
               <Route path='/register' element={<RegisterPage />}></Route>
             </Route>
           </Routes>
-        </Router>
     </>
   )
 }
