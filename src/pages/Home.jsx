@@ -13,7 +13,7 @@ export const Home = () => {
 
     useEffect(() => {
         async function fetchRooms() {
-            const res = await fetch('https://bnt-app.onrender.com/games', {
+            const res = await fetch('https://bnt-app.vercel.app/games', {
                 credentials: 'include'
             })
             const data = await res.json()

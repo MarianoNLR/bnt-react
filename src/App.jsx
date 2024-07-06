@@ -16,14 +16,14 @@ function App() {
     <>
           <Routes>
             <Route element={<LoggedLayout />}>
-              <Route index path='/' element={ user ? <Home /> : <Navigate to="/login" />}></Route>
+              <Route path='/' element={ user ? <Home /> : <Navigate to="/login" />}></Route>
               <Route path='/room/:room' element={ user ? <GameBet /> : <Navigate to="/login" />}></Route>
               <Route path='/my_games' element={<MyGames />}></Route>
               <Route path='/game_view/:room' element={<GameView />}></Route>
             </Route>
 
             <Route element={<AuthLayout />}>
-              <Route path='/login' element={<LoginPage />}></Route>
+              <Route index path='/login' element={<LoginPage />}></Route>
               <Route path='/register' element={<RegisterPage />}></Route>
             </Route>
           </Routes>
