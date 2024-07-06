@@ -16,7 +16,7 @@ export const GameBet = () => {
 
     useEffect(() => {
        const fetchRoomData = async() =>  {
-        const res = await fetch(`http://localhost:3000/games/get/${room}`, {
+        const res = await fetch(`https://bnt-app.onrender.com/games/get/${room}`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -36,7 +36,7 @@ export const GameBet = () => {
             return console.error(`Solamente tienes ${user.coins}`)
         }
         try {
-            const res = await fetch(`http://localhost:3000/bets/${room}`, {
+            const res = await fetch(`https://bnt-app.onrender.com/bets/${room}`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

@@ -12,7 +12,7 @@ export const MyGames = () => {
     useEffect(() => {
 
         const fetchMyGames = async () => {
-            const res = await fetch(`http://localhost:3000/games/myGames`, {
+            const res = await fetch(`https://bnt-app.onrender.com/games/myGames`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -37,7 +37,7 @@ export const MyGames = () => {
     const handleCloseClick = async (roomId, e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`http://localhost:3000/games`, {
+            const res = await fetch(`https://bnt-app.onrender.com/games`, {
                 method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',

@@ -15,7 +15,7 @@ export const GameView = () => {
 
     useEffect(() => {
         const fetchBets = async () => {
-            const res = await fetch(`http://localhost:3000/bets/${room}`, {
+            const res = await fetch(`https://bnt-app.onrender.com/bets/${room}`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -27,7 +27,7 @@ export const GameView = () => {
                 ...bet, result: 'win'
             })))
 
-            const resRoom = await fetch(`http://localhost:3000/games/get/${room}`, {
+            const resRoom = await fetch(`https://bnt-app.onrender.com/games/get/${room}`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -51,7 +51,7 @@ export const GameView = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`http://localhost:3000/bets/${room}/results`, 
+            const res = await fetch(`https://bnt-app.onrender.com/bets/${room}/results`, 
                 {
                     method: 'POST',
                     credentials: 'include',
