@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client'
 
-const SOCKET_URL = 'https://bnt-app.onrender.com/'
+const SOCKET_URL = 'https://bnt-app.vercel.app/'
 
 const socket = io(SOCKET_URL, {
     withCredentials: true
