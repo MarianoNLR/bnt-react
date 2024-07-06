@@ -13,7 +13,7 @@ export const UserProvider = ({children}) => {
     useEffect(()=> {
         const fetchUser = async () => {
             try {
-                const res = await fetch(`https://bnt-app.onrender.com/auth`, { 
+                const res = await fetch(`https://bnt-app.vercel.app/auth`, { 
                     method: 'GET',
                     credentials: 'include'
                 })
@@ -37,7 +37,7 @@ export const UserProvider = ({children}) => {
 
     const login = async (username, password) => {
         try {
-            const res = await fetch('https://bnt-app.onrender.com/auth/login', {
+            const res = await fetch('https://bnt-app.vercel.app/auth/login', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

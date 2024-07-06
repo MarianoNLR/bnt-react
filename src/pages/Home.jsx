@@ -81,7 +81,7 @@ export const Home = () => {
     const handleCloseClick = async (roomId, e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`https://bnt-app.onrender.com/games`, {
+            const res = await fetch(`https://bnt-app.vercel.app/games`, {
                 method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',

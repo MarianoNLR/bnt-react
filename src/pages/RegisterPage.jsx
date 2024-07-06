@@ -28,7 +28,7 @@ export const RegisterPage = () => {
         e.preventDefault()
 
         try {
-            const res = await fetch('https://bnt-app.onrender.com/auth/register', {
+            const res = await fetch('https://bnt-app.vercel.app/auth/register', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
