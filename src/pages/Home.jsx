@@ -12,7 +12,7 @@ export const Home = () => {
 
     useEffect(() => {
         async function fetchRooms() {
-            const res = await fetch('http://localhost:3000/games', {
+            const res = await fetch('https://bnt-app.onrender.com/games', {
                 credentials: 'include'
             })
             const data = await res.json()
@@ -32,7 +32,7 @@ export const Home = () => {
     const createRoom = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch('http://localhost:3000/games/', {
+            const res = await fetch('https://bnt-app.onrender.com/games/', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -62,7 +62,7 @@ export const Home = () => {
     const handleCloseClick = async (roomId, e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`http://localhost:3000/games`, {
+            const res = await fetch(`https://bnt-app.onrender.com/games`, {
                 method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',
