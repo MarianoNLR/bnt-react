@@ -5,11 +5,11 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: parseInt(import.meta.env.VITE_PORT, 10) || 5173,
+    port: 5173,
     host: true,
   },
   preview: {
-    port: parseInt(import.meta.env.VITE_PORT, 10) || 4173,
+    port: 4173,
     host: true,
   }
 })
