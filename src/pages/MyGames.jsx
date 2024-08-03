@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import './css/MyGames.css'
-import { useUser } from "../components/UserProvider.jsx"
+import { useAuth } from "../components/UserProvider.jsx"
 
 export const MyGames = () => {
     const [myGames, setMyGames] = useState([])
     const [loading, setLoading] = useState(true)
-    const { user } = useUser()
+    const { user, loadingUser } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
-
         const fetchMyGames = async () => {
-            const res = await fetch(`https://bnt-app.vercel.app/games/myGames`, {
+            const res = await fetch(`http://localhost:3000/games/myGames`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -37,7 +36,7 @@ export const MyGames = () => {
     const handleCloseClick = async (roomId, e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`https://bnt-app.vercel.app/games`, {
+            const res = await fetch(`http://localhost:3000/games`, {
                 method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',
@@ -56,6 +55,10 @@ export const MyGames = () => {
             console.error(error)
         }
         
+    }
+
+    if (loadingUser) {
+        return <></>
     }
 
     return (

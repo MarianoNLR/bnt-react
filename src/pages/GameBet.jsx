@@ -2,8 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { FormInput } from '../components/FormInput.jsx'
 import './css/GameBet.css'
-import { useUser } from "../components/UserProvider.jsx"
-import socket from '../utils/socket.js'
+import { useAuth } from "../components/UserProvider.jsx"
 
 export const GameBet = () => {
     const {room} = useParams()
@@ -11,12 +10,12 @@ export const GameBet = () => {
     const [betCoins, setBetCoins] = useState(0)
     const [roomData, setRoomData] = useState(null)
     const [loading, setLoading] = useState(true)
-    const { user } = useUser()
+    const { user } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
        const fetchRoomData = async() =>  {
-        const res = await fetch(`https://bnt-app.vercel.app/games/get/${room}`, {
+        const res = await fetch(`http://localhost:3000/games/get/${room}`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -36,7 +35,7 @@ export const GameBet = () => {
             return console.error(`Solamente tienes ${user.coins}`)
         }
         try {
-            const res = await fetch(`https://bnt-app.vercel.app/bets/${room}`, {
+            const res = await fetch(`http://localhost:3000/bets/${room}`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -49,7 +48,6 @@ export const GameBet = () => {
             if (!res.ok) {
                 console.error(res)
             } else {
-                socket.emit('updateCoins', 'update coins')
                 navigate('/')
             }
         } catch (error) {

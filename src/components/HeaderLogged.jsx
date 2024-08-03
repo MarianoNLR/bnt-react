@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import './css/Header.css'
 import { useEffect, useState } from "react"
-import socket from "../utils/socket.js"
-import { useUser } from "./UserProvider.jsx"
+import { useAuth } from "./UserProvider.jsx"
 
 export const HeaderLogged = () => {
     const navigate = useNavigate()
-    const { user } = useUser()
+    const { user } = useAuth()
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {

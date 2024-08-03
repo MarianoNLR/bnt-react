@@ -1,81 +1,49 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import socket from '../utils/socket.js'
+import React, {createContext, useState, useContext, useEffect} from "react";
+import { authenticateUser, getUserFromToken, logoutUser } from "../utils/authUserService.jsx";
 
-const UserContext = createContext()
+const AuthContext = createContext()
 
-export const useUser = () => {
-    return useContext(UserContext)
-}
-
-export const UserProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loadingUser, setLoadingUser] = useState(true)
 
-    useEffect(()=> {
-        const fetchUser = async () => {
-            try {
-                const res = await fetch(`https://bnt-app.vercel.app/auth`, { 
-                    method: 'GET',
-                    credentials: 'include'
-                })
-
-                const data = await res.json()
-                setUser(data.user)
-            } catch (error) {
-                console.error('Error')
-            }
+    const fetchUser = async () => {
+        const user = await getUserFromToken()
+        if (user) {
+            setUser(user)
         }
-        fetchUser()
-        
-        socket.on('updateCoins', (data) => {
-            fetchUser()
-        })
+        setLoadingUser(false)
+    }
 
-        return (() => {
-            socket.off('updateCoins')
-        })
+    useEffect(() => {
+        fetchUser()
     }, [])
 
-    const login = async (username, password) => {
+    const login = async (credentials) => {
         try {
-            const res = await fetch('https://bnt-app.vercel.app/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password }),
-                credentials: 'include',
-            })
-
-            if (!res.ok) {
-                console.error(res)
-            } else {
-                const userData = await res.json()
-                setUser(userData)
-            }
+            const user = await authenticateUser(credentials)
+            setUser(user)
+            console.log(user)
         } catch (error) {
-            console.log(error)
+            console.error('Error in Login: ', error)
+            throw error
         }
     }
 
-    // const updateCoinsUser = async () => {
-    //     try {
-    //         const res = await fetch(`http://localhost:3000/auth`, { 
-    //             method: 'GET',
-    //             credentials: 'include'
-    //         })
-
-    //         const data = await res.json()
-    //         setUser(data.user)
-    //     } catch (error) {
-    //         console.error('Error')
-    //     }
-    // }
+    const logout = async () => {
+        try {
+            await logoutUser()
+            setUser(null)
+        } catch (error) {
+            console.error('Error: ', error)
+        }
+    }
 
     return (
-        <UserContext.Provider value={{user, login}}>
+        <AuthContext.Provider value={{user, loadingUser, login, logout, fetchUser}}>
             {children}
-        </UserContext.Provider>
+        </AuthContext.Provider>
     )
-
 }
+
+export const useAuth = () => useContext(AuthContext)

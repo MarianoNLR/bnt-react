@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './css/Home.css'
-import { useUser } from '../components/UserProvider'
-//import socket from '../utils/socket.js'
+import { useAuth } from '../components/UserProvider.jsx'
 
 export const Home = () => {
     const [roomName, setRoomName] = useState('')
     const [roomList, setRoomList] = useState([])
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
-    const { user } = useUser()
+    const { user, loadingUser } = useAuth()
 
     useEffect(() => {
         async function fetchRooms() {
-            const res = await fetch('https://bnt-app.vercel.app/games', {
+            const res = await fetch('http://localhost:3000/games', {
                 credentials: 'include'
             })
             const data = await res.json()
@@ -22,20 +21,6 @@ export const Home = () => {
         }
 
         fetchRooms()
-        // socket.emit('getRoomList')
-
-        // const fetchRoomList = () => {
-        //     socket.emit('getRoomList')
-        //     socket.on('roomList', (rooms) => {
-        //         setRoomList(rooms)
-        //     })
-        // }
-
-        // fetchRoomList()
-
-        // return () => {
-        //     socket.off('roomList');
-        // };
     }, [])
 
 
@@ -47,7 +32,7 @@ export const Home = () => {
     const createRoom = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch('https://bnt-app.onrender.com/games/', {
+            const res = await fetch('http://localhost:3000/games/', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -69,10 +54,6 @@ export const Home = () => {
         
     }
 
-    // const joinRoom = (roomName) => {
-    //     navigate(`/room/${roomName}`)
-    // }
-
     const handleJoinClick = (room, e) => {
         e.preventDefault()
         navigate(`/room/${room.id}`)
@@ -81,7 +62,7 @@ export const Home = () => {
     const handleCloseClick = async (roomId, e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`https://bnt-app.vercel.app/games`, {
+            const res = await fetch(`http://localhost:3000/games`, {
                 method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',
@@ -102,12 +83,21 @@ export const Home = () => {
         
     }
 
+    if (loadingUser) {
+        return <></>
+    }
+
+    if (loading) {
+        return <></>
+    }
+
     return(
         <>
             <main className='main-home'>
             {!loading &&
             <>
-                <h1>Salas Abiertas</h1>
+                <h1>Bienvenido {user.username}</h1>
+                <h3>Salas Abiertas</h3> 
                 <form className='create-room-form'>
                 <input
                 className='create-room-input'

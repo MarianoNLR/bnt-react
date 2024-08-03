@@ -3,12 +3,12 @@ import { FormInput } from "../components/FormInput.jsx"
 import '../components/css/FormInput.css'
 import { useNavigate } from "react-router-dom"
 import './css/LoginPage.css'
-import { useUser } from "../components/UserProvider.jsx"
+import { useAuth } from "../components/UserProvider.jsx"
 
 export function LoginPage() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const { login } = useUser()
+    const { login } = useAuth()
     const navigate = useNavigate()
     const handleChangeUsername = (e) => {
         e.preventDefault()
@@ -22,7 +22,7 @@ export function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await login(username, password)
+        await login({username, password})
         navigate('/')
     }
 

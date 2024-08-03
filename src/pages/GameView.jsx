@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import socket from '../utils/socket.js'
 import './css/GameView.css'
-import { useUser } from "../components/UserProvider.jsx"
+import { useAuth } from "../components/UserProvider.jsx"
 
 export const GameView = () => {
     const { room } = useParams()
     const [roomData, setRoomData] = useState(null)
     const [bets, setBets] = useState([])
-    const { user } = useUser()
+    const { user, loadingUser } = useAuth()
     const navigate = useNavigate()
     const [results, setResults] = useState([{}])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchBets = async () => {
-            const res = await fetch(`https://bnt-app.vercel.app/bets/${room}`, {
+            const res = await fetch(`http://localhost:3000/bets/${room}`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -27,7 +26,7 @@ export const GameView = () => {
                 ...bet, result: 'win'
             })))
 
-            const resRoom = await fetch(`https://bnt-app.vercel.app/games/get/${room}`, {
+            const resRoom = await fetch(`http://localhost:3000/games/get/${room}`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -51,7 +50,7 @@ export const GameView = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`https://bnt-app.vercel.app/bets/${room}/results`, 
+            const res = await fetch(`http://localhost:3000/bets/${room}/results`, 
                 {
                     method: 'POST',
                     credentials: 'include',
@@ -66,11 +65,14 @@ export const GameView = () => {
             if (!res.ok) {
                 console.error(res)
             } else {
-                socket.emit('updateCoins', 'update coins')
                 navigate('/')
             }
             
         } catch (error) { }
+    }
+
+    if (loadingUser) {
+        return <></>
     }
 
     return (
